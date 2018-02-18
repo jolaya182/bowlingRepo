@@ -1,17 +1,6 @@
 function bowlingScore(bowlingSequenceValues) {
 
   let bsv = bowlingSequenceValues;
-  //scenario 1
-  //X X X X X X X X X X X X (12 rolls: 12 strikes) = 10 frames * 30 points = 300
-
-  //scenario 2 
-  //9- 9- 9- 9- 9- 9- 9- 9- 9- 9- (20 rolls: 10 pairs of 9 and miss) = 10 frames * 9 points = 90
-
-  //scenario 3
-  //5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5 (21 rolls: 10 pairs of 5 and spare, with a final 5) = 10 frames * 15 points = 150
-
-
-  //get each character
   //serparate them by spaces
   let pS = processString(bsv);
   //pair them
@@ -137,36 +126,88 @@ console.log(bowlingScore(string3));
 // Additionally, there must be exactly 10 frames total (allowing necessary bonus throws). 
 // Expand your test cases to cover this.
 
-console.log(validateRegEx(string2));
+console.log(validation(string1));
+console.log(validation(string2));
+console.log(validation(string3));
 
 
 function validation(s){
-  validateRegEx();
-  validNumberOfPins();
-  validNumberOfFrames()
+let results1 = validateRegEx(s);
+let results2 = validNumberOfPins(s);
+let results3 = validNumberOfFrames(s);
+//console.log(results1, results2, results3 );
+if( typeof results1 !== "string" &&  typeof results2 !== "string"  &&  typeof results3 !== "string")return true;
+if(typeof results1 == "string")return "validateRegEx failed and returned: " +results1 ;
+if(typeof results2 == "string")return " validNumberOfPins failed and returned: " + results2 ;
+if(typeof results3 == "string")return " validNumberOfFrames  failed and returned: " + results3 + ".";;
+
+
+return "some other error"; 
 }
 
 
-function validNumberOfPins(){
-  return true;
+function validNumberOfFrames(s){
+  let results = pairThem(processString(s));
+  let resLen = results.length;
+  
+  if( resLen === 10) return true;
+  if( resLen === 11){
+    //check that the 10th frame is a spare
+    if(results[9].charAt(1) === "/")return true;
+    //check if the 10 frame is a strike
+    if(results[9].charAt(0) === "X")return true;
+
+    return "the length of the input is 11 the last frame has incorrect input";
+  } 
+  //check for that last possible strike
+  if(resLen === 12){
+    //check for the last possible frame to be a strike
+    if(results[10].charAt(0) === "X")return true;
+    //return 
+    return "the length of the input is 12 snd the last frame has incorrect input which should X";
+  }
+  //after failling  all checks 
+   return  "string has wrong amount of frames"; 
+  
 }
 
-function validNumberOfFrames(){
-  return true;
+function validNumberOfPins(s){
+  let results = pairThem(processString(s));
+  let c1 = "";
+  let c2 = "";
+  let unit = "";
+  let regEx1 = new RegExp( /[0-9]/ );
+  
+  //loop through the whole array
+  for(let i = 0; i < results.length; i += 1){
+      unit = results[i];
+      c1 = unit.charAt(0);
+      c2 = unit.charAt(1);
+      //validate the possible characters
+      //console.log();
+      if(c1 === "x" || c1 === "X" )c1 = "X";
+      if ( c1 !== "X" &&  c1 !== "-" &&  !regEx1.test(parseInt(c1) )) {return "first character in "+ unit+ " does not contain the right characters";}
+      if (  c2 !== "/" && c2 !== "-" && !regEx1.test(parseInt(c1) ) ) {return "second character in "+ unit+ " does not contain the right characters";}
+      // validate the right possible scenarios, there are 7 scenarios to check;
+      let c3 = c1 + c2;
+      if( c3  === "X-" ||  c3  === "--" ||c3  === "-/")continue;
+      if( regEx1.test(c1) && c2 === "-" )continue;
+      if( regEx1.test(c1) && c2 === "/" )continue;
+      if( c1 === "-" && regEx1.test(c2)  )continue;
+      //check if the numer range is correct
+      if(regEx1.test(c3) )continue;
+
+      return "does not have the right amount of pins or the right amount of  combination"
+  }
+  
+      //did  meet the possible combination or number of pins
+      return true; 
 }
 
 function validateRegEx(s){
-  let results = validNumbers(s);
-
-  if( validNumbers(s) === true ){
-    return results;
-  }
   
-  return results;
+  let regEx1 = new RegExp( /[0-9\-\/\X ]/ );
+  return  regEx1.test(s)? true  : "in valid set of characters,\nplease verify characters are 0-9, /, X ";
+
 }
 
-function validNumbers(s){
-  let result = "";
-  let regEx1 = new RegExp( /[0-9]/ );
-  return regEx1.test(s)? true : "in valid set of numbers "
-}
