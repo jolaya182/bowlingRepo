@@ -114,21 +114,12 @@ function processString(stringV) {
   return processedString;
 }
 
-let string1 = "X X X X X X X X X X X X";
-let string2 = "9- 9- 9- 9- 9- 9- 9- 9- 9- 9-";
-let string3 = "5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5";
-console.log(bowlingScore(string1));
-console.log(bowlingScore(string2));
-console.log(bowlingScore(string3));
+
 
 // Validate the input. Identify sequences of input that do not constitute valid games. 
 // Specifically, the number of knocked-down (not bonus) pins in each frame must not exceed 10. 
 // Additionally, there must be exactly 10 frames total (allowing necessary bonus throws). 
 // Expand your test cases to cover this.
-
-console.log(validation(string1));
-console.log(validation(string2));
-console.log(validation(string3));
 
 
 function validation(s) {
@@ -210,8 +201,6 @@ function validateRegEx(s) {
   return regEx1.test(s) ? true : "in valid set of characters,\nplease verify characters are 0-9, /, X ";
 
 }
-
-
 
 module.exports = {
 
