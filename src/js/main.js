@@ -137,15 +137,36 @@ console.log(bowlingScore(string3));
 // Additionally, there must be exactly 10 frames total (allowing necessary bonus throws). 
 // Expand your test cases to cover this.
 
+console.log(validateRegEx(string2));
+
+
 function validation(s){
+  validateRegEx();
   validNumberOfPins();
   validNumberOfFrames()
 }
 
-function validNumberOfPins(){
 
+function validNumberOfPins(){
+  return true;
 }
 
 function validNumberOfFrames(){
+  return true;
+}
 
+function validateRegEx(s){
+  let results = validNumbers(s);
+
+  if( validNumbers(s) === true ){
+    return results;
+  }
+  
+  return results;
+}
+
+function validNumbers(s){
+  let result = "";
+  let regEx1 = new RegExp( /[0-9]/ );
+  return regEx1.test(s)? true : "in valid set of numbers "
 }
