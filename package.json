@@ -1,0 +1,30 @@
+{
+  "name": "bowlingrepo",
+  "version": "1.0.0",
+  "description": "kata challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/js/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jolaya182/bowlingRepo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jolaya182/bowlingRepo/issues"
+  },
+  "homepage": "https://github.com/jolaya182/bowlingRepo#readme",
+  "devDependencies": {
+   
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "prettier-eslint": "^8.8.1",
+    "autoprefixer": "^8.0.0"
+  },
+  "dependencies": {
+    
+  }
+}
