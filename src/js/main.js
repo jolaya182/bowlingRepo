@@ -12,12 +12,15 @@ function bowlingScore(bowlingSequenceValues) {
 }
 function scorePairs(pairs) {
   //define the variables
+  console.log("pairs:",pairs);  
   let score = 0;
   let pLen = pairs.length;
   let tempH = "";
+  let regEx1 = new RegExp(/[0-9]/);
+
   //go through array 
   for (let i = 0; i < 10; i += 1) {
-    //shift out each pair from the index only for  a max 10 times
+    //loop for a  max 10 times
     tempH = pairs[i];
     // determine the score using function
     score += determineScore(tempH);
@@ -25,22 +28,36 @@ function scorePairs(pairs) {
     if (pairs[i + 1]) {
       let c1 = pairs[i].charAt(0);
       let c2 = pairs[i].charAt(1);
+      //look ahead of the and determine a score will be added
       //check if the next frame is a strike and see if you need to add to the score
       if (c1 === "X") score += determineScore(pairs[i + 1]);
       //check if the next next frame is a strike and see if you need to add to the score
-      if (c1 === "X" && pairs[i + 2]) score += determineScore(pairs[i + 2]);
+      if (pairs[i + 2] && c1 === "X" &&  pairs[i + 2].charAt(0) === "X"   ){
+         score += determineScore(pairs[i + 2]);
+      }
+      //check if there is a number for the last frame
+      if( i==9 && pairs[i+1] &&  !isNaN(pairs[i+1] ) ){
+        console.log("i --9  i+1  score: ", score, " !isNaN(pairs[i+1] )  ",  !isNaN(pairs[i+1] ) );
+        score += determineScore(pairs[i + 1]);
+        console.log("i --9  i+1  score: ", score);
+      }
+      if( i==9 && pairs[i+2] && !isNaN(pairs[i+1] )  ){
+        score += determineScore(pairs[i + 2]);
+        console.log("i --9  i+2 score: ", score);
+      }
 
       //for this spare add the throw of the next frame  
       if (c2 === "/") {
         c1 = pairs[i + 1].charAt(0);
         c2 = pairs[i + 1].charAt(1);
         score += determineScore(c1 + "-");
+        console.log("c2 === /  score: ", score);
       }
     }
+    console.log(i, ", score: ",score, "pairs[i]", pairs[i]);
   }
 
   // return the score calculated
-
   return score;
 }
 
@@ -64,12 +81,13 @@ function determineScore(pair) {
 
 function pairThem(pS) {
   let resultedPairs = [];
+  //console.log("pS: ", pS)
   //go through the arrray as pairs
   for (let i = 0; i < pS.length; i += 2) {
 
     let ps1 = "";
     let ps2 = "";
-
+//let string4 = "17 53 5/ 9/ X 41 42 53 8/ X X X";
     if (pS[i] === "X") {
       ps1 = pS[i];
       ps2 = "-";
@@ -105,7 +123,11 @@ function processString(stringV) {
   for (let i = 0; i < stringLen; i++) {
     if (stringV[i] == "x" || stringV[i] == "X" || stringV[i] == "/" || stringV[i] == "-" || !isNaN(stringV[i])) {
       if (stringV[i] === " ") continue;
-      if (stringV[i] == "x") stringV[i] = stringV[i].toUpperCase();
+      if (stringV[i] == "x"|| stringV[i] == "X" ){ 
+         processedString +="X ";
+         continue; 
+      }
+
       processedString += stringV[i];
 
     }
@@ -113,8 +135,9 @@ function processString(stringV) {
   }
   return processedString;
 }
-
-
+let string4 = "17 53 5/ 9/ X 41 42 53 8/ X X X";
+console.log(  bowlingScore( string4 ) );
+//console.log(  validation( string4 ) );
 
 // Validate the input. Identify sequences of input that do not constitute valid games. 
 // Specifically, the number of knocked-down (not bonus) pins in each frame must not exceed 10. 
@@ -175,7 +198,7 @@ function validNumberOfPins(s) {
     c1 = unit.charAt(0);
     c2 = unit.charAt(1);
     //validate the possible characters
-    //console.log();
+    //console.log(i ,": ", unit);
     if (c1 === "x" || c1 === "X") c1 = "X";
     if (c1 !== "X" && c1 !== "-" && !regEx1.test(parseInt(c1))) { return "first character in " + unit + " does not contain the right characters"; }
     if (c2 !== "/" && c2 !== "-" && !regEx1.test(parseInt(c1))) { return "second character in " + unit + " does not contain the right characters"; }
