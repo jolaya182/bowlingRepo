@@ -22,7 +22,7 @@ let validationScoreSpare = app.validation(string3);
 let validationScore139 = app.validation(string4);
 let validationScore202 = app.validation(string5);
 
-
+ 
 
 describe("bowlingRepoApplication", () => {
   describe("having all strikes:", () => {
