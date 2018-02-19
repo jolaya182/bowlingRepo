@@ -8,8 +8,8 @@ let string3 = "5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5";
 let string4 = "17 53 5/ 9/ X 41 42 53 8/ X X X";
 let string5 = "44 44 44 54 5/ X X X X X X 9";
 
-// let bowlingScoreStrike = app.bowlingScore(string1);
-// let bowlingScorePin9  = app.bowlingScore(string2);
+let bowlingScoreStrike = app.bowlingScore(string1);
+let bowlingScorePin9  = app.bowlingScore(string2);
 let bowlingScoreSpare = app.bowlingScore(string3);
 let bowlingScore139 = app.bowlingScore(string4);
 let bowlingScore202 = app.bowlingScore(string5);
@@ -23,16 +23,16 @@ let validationScore202 = app.validation(string5);
 
 
 describe("bowlingRepoApplication", () => {
-  // describe("having all strikes:", () => {
-  //   it("out put should equal to 300", () => {
-  //     assert.equal(bowlingScoreStrike, 300);
-  //   });
-  // });
-  // describe("having all scores 9 all frames:", () => {
-  //   it("out put should equal to 90", () => {
-  //     assert.equal(bowlingScorePin9, 90);
-  //   });
-  // });
+  describe("having all strikes:", () => {
+    it("out put should equal to 300", () => {
+      assert.equal(bowlingScoreStrike, 300);
+    });
+  });
+  describe("having all scores 9 all frames:", () => {
+    it("out put should equal to 90", () => {
+      assert.equal(bowlingScorePin9, 90);
+    });
+  });
   describe("having all spare:", () => {
     it("out put should equal to 150", () => {
       assert.equal(bowlingScoreSpare, 150);

@@ -36,12 +36,12 @@ function scorePairs(pairs) {
          score += determineScore(pairs[i + 2]);
       }
       //check if there is a number for the last frame
-      if( i==9 && pairs[i+1] &&  !isNaN(pairs[i+1] ) ){
-        console.log("i --9  i+1  score: ", score, " !isNaN(pairs[i+1] )  ",  !isNaN(pairs[i+1] ) );
+      if( i==9 && pairs[i+1] &&  !isNaN(pairs[i+1].charAt(0) )  &&  pairs[i].charAt(1)!== "/" ){
+        console.log("i --9  i+1  score: ", score," pairs[i+1]",pairs[i+1], "!isNaN(pairs[i+1].charAt(0) ",  !isNaN(pairs[i+1].charAt(0)), " pairs[i+1].charAt(1)!== /", pairs[i+1].charAt(1)!== "/" );
         score += determineScore(pairs[i + 1]);
         console.log("i --9  i+1  score: ", score);
       }
-      if( i==9 && pairs[i+2] && !isNaN(pairs[i+1] )  ){
+      if( i==9 && pairs[i+2] && !isNaN(pairs[i+2].charAt(0) ) &&  pairs[i].charAt(1)!== "/" ){
         score += determineScore(pairs[i + 2]);
         console.log("i --9  i+2 score: ", score);
       }
@@ -136,7 +136,7 @@ function processString(stringV) {
   return processedString;
 }
 let string4 = "17 53 5/ 9/ X 41 42 53 8/ X X X";
-console.log(  bowlingScore( string4 ) );
+// console.log(  bowlingScore( string4 ) );
 //console.log(  validation( string4 ) );
 
 // Validate the input. Identify sequences of input that do not constitute valid games. 
