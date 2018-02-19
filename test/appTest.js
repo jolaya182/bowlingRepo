@@ -9,13 +9,13 @@ let string4 = "17 53 5/ 9/ X 41 42 53 8/ X X X";
 let string5 = "44 44 44 54 5/ X X X X X X 9";
 
 let bowlingScoreStrike = app.bowlingScore(string1);
-let bowlingScorePin9  = app.bowlingScore(string2);
+let bowlingScorePin9 = app.bowlingScore(string2);
 let bowlingScoreSpare = app.bowlingScore(string3);
 let bowlingScore139 = app.bowlingScore(string4);
 let bowlingScore202 = app.bowlingScore(string5);
 
 let validationStrike = app.validation(string1);
-let validationScorePin9  = app.validation(string2);
+let validationScorePin9 = app.validation(string2);
 let validationScoreSpare = app.validation(string3);
 let validationScore139 = app.validation(string4);
 let validationScore202 = app.validation(string5);
@@ -55,7 +55,7 @@ describe("bowlingRepoApplication", () => {
   });
   describe("having a total score of 139 for all frames:", () => {
     it("should  return 139:", () => {
-      assert.equal(bowlingScore139 , 139);
+      assert.equal(bowlingScore139, 139);
     });
   });
   describe("having a total score of 139 validated  frames:", () => {
@@ -65,7 +65,7 @@ describe("bowlingRepoApplication", () => {
   });
   describe("having a total score of 202 for all frames:", () => {
     it("should  return 202:", () => {
-      assert.equal(bowlingScore202 , 202);
+      assert.equal(bowlingScore202, 202);
     });
   });
   describe("having a total score of 202 validated frames:", () => {
