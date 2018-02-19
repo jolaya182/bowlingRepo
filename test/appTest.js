@@ -1,19 +1,21 @@
 const assert = require('chai').assert;
 const app = require("../src/js/main.js");
 
-
+//test cases
 let string1 = "X X X X X X X X X X X X";
 let string2 = "9- 9- 9- 9- 9- 9- 9- 9- 9- 9-";
 let string3 = "5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5";
 let string4 = "17 53 5/ 9/ X 41 42 53 8/ X X X";
 let string5 = "44 44 44 54 5/ X X X X X X 9";
 
+//call in function and pass the test cases
 let bowlingScoreStrike = app.bowlingScore(string1);
 let bowlingScorePin9 = app.bowlingScore(string2);
 let bowlingScoreSpare = app.bowlingScore(string3);
 let bowlingScore139 = app.bowlingScore(string4);
 let bowlingScore202 = app.bowlingScore(string5);
 
+//call in validation functions and pass in test cases
 let validationStrike = app.validation(string1);
 let validationScorePin9 = app.validation(string2);
 let validationScoreSpare = app.validation(string3);
